@@ -152,3 +152,12 @@ p {
 p b {
   color: #374151;
 }
+
+button:last-child {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+button:last-child:hover {
+  background: #fecaca;
+}
