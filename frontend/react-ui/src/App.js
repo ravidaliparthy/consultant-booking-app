@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSlots, addSlot, bookSlot, cancelSlot } from "./api";
+import { getSlots, addSlot, bookSlot, cancelSlot, deleteSlot } from "./api";
 import "./App.css";
 
 export default function App() {
@@ -65,6 +65,15 @@ export default function App() {
         {slots.map(s => (
           <li key={s.id}>
             {s.time} — <b>{s.booked ? "Booked" : "Available"}</b>
+       <button
+          onClick={() => {
+          if (window.confirm("Delete this slot?")) {
+              deleteSlot(s.id).then(load);
+                      }
+                  }}
+               >
+              Delete
+          </button>
             {!s.booked && <button onClick={() => bookSlot(s.id).then(load)}>Book</button>}
             {s.booked && <button onClick={() => cancelSlot(s.id).then(load)}>Cancel</button>}
           </li>
