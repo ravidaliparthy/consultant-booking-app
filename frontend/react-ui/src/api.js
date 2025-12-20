@@ -28,3 +28,8 @@ export const cancelSlot = (slotId) =>
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ slotId })
   });
+
+export const deleteSlot = (slotId) =>
+  fetch(`${API}/slots/${slotId}`, {
+    method: "DELETE"
+  }).then(res => res.json());
