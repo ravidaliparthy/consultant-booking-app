@@ -81,4 +81,21 @@ router.post("/cancel", (req, res) => {
   res.json({ message: "Booking cancelled" });
 });
 
+/* Delete slot */
+router.delete("/slots/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.run("DELETE FROM bookings WHERE slot_id = ?", [id]);
+  db.run("DELETE FROM slots WHERE id = ?", [id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+
+    if (this.changes === 0) {
+      return res.status(404).json({ error: "Slot not found" });
+    }
+
+    res.json({ message: "Slot deleted successfully" });
+  });
+});
+
+
 export default router;
